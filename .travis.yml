@@ -1,0 +1,13 @@
+language: cpp
+dist: trusty
+
+sudo: required
+
+services:
+  - docker
+  
+before_install:
+  - docker pull yadoms/build_for_synology218p${DOCKER_TAG}
+  
+script:
+  - docker run -it -e MAKE_PACKAGE=true -e YADOMS_BUILD_BRANCH=${YADOMS_BRANCH} -e UPLOAD_FTP_CREDENTIALS=${FTP_USER}:${FTP_PASSWORD} yadoms/build_for_synology218p${DOCKER_TAG} /entrypoint.sh
